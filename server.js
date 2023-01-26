@@ -65,26 +65,26 @@ const RootQueryType = new GraphQLObjectType({
     name: 'Query',//name of the type
     description: 'Root Query',//description of the type
     fields: () => ({//fields is the object that contains the data
-        book:{
-            type:BookType,
-            description:'A Single Book',
-            args:{
-                id:{type:GraphQLInt}
+        book: {
+            type: BookType,
+            description: 'A Single Book',
+            args: {
+                id: {type: GraphQLInt}
             },
-            resolve: (parent,args) => books.find(book => book.id === args.id)
+            resolve: (parent, args) => books.find(book => book.id === args.id)
         },
         books: {//books is the field
             type: new GraphQLList(BookType),//type of the field
             description: 'List of All Books',//description of the field
             resolve: () => books//resolve is the function that returns the data
         },
-        author:{
-            type:AuthorType,
-            description:'A Single Author',
-            args:{
-                id:{type:GraphQLInt}
+        author: {
+            type: AuthorType,
+            description: 'A Single Author',
+            args: {
+                id: {type: GraphQLInt}
             },
-            resolve: (parent,args) => authors.find(author => author.id === args.id)
+            resolve: (parent, args) => authors.find(author => author.id === args.id)
         },
         authors: {//authors is the field
             type: new GraphQLList(AuthorType),//type of the field
@@ -93,6 +93,29 @@ const RootQueryType = new GraphQLObjectType({
         }
     })
 });
+
+
+//create rootMutation GraphQLObjectType
+const RootMutationType = new GraphQLObjectType({
+    name: 'Mutation',//name of the type
+    description: 'Root Mutation',//description of the type
+    fields: () => ({//fields is the object that contains the data
+        addBook: {//addBook is the field
+            type: BookType,//type of the field
+            description: 'Add a book',//description of the field
+            args: {//args is the object that contains the arguments
+                name: {type: GraphQLNonNull(GraphQLString)},//name is the argument
+                authorId: {type: GraphQLNonNull(GraphQLInt)},//authorId is the argument
+            },
+            resolve: (parent, args) => {//resolve is the function that returns the data
+                const book = {id: books.length + 1, name: args.name, authorId: args.authorId};
+                books.push(book);
+                return book;
+            }
+        }
+    })
+});
+
 
 //create schema
 const schema = new GraphQLSchema({
