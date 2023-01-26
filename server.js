@@ -27,7 +27,7 @@ const books = [
     {id: 8, name: 'Beyond the Shadows', authorId: 3}
 ];
 
-//create book GraphQLObjectType
+//create bookType GraphQLObjectType
 const BookType = new GraphQLObjectType({
     name: 'Book',//name of the type
     description: 'This represents a book written by an author',//description of the type
@@ -35,6 +35,16 @@ const BookType = new GraphQLObjectType({
         id: {type: GraphQLNonNull(GraphQLInt)},//id is the field
         name: {type: GraphQLNonNull(GraphQLString)},//name is the field
         authorId: {type: GraphQLNonNull(GraphQLString)},//authorId is the field
+    })
+});
+
+//create authorType GraphQLObjectType
+const AuthorType = new GraphQLObjectType({
+    name: 'Author',//name of the type
+    description: 'This represents an author of a book',//description of the type
+    fields: () => ({//fields is the object that contains the data
+        id: {type: GraphQLNonNull(GraphQLInt)},//id is the field
+        name: {type: GraphQLNonNull(GraphQLString)},//name is the field
     })
 });
 
