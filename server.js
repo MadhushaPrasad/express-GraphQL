@@ -1,10 +1,17 @@
 const express = require("express");
 
-const expressGraphQL = require("express-graphql");
+const {graphqlHTTP} = require("express-graphql");
+
+const port = 5000;
 
 const app = express();
 
-const port = 5000;
+app.use('/graphql', graphqlHTTP(
+    {
+      graphiql: true,
+    }
+))
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
