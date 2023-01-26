@@ -6,7 +6,7 @@ const port = 5000;
 //import {graphqlHTTP} from "express-graphql";
 const {graphqlHTTP} = require("express-graphql");
 //import GraphQLSchema,GraphQLObjectType,GraphQLInt,GraphQLNonNull and GraphQLString  from "graphql";
-const {GraphQLSchema, GraphQLObjectType, GraphQLString,GraphQLInt,GraphQLNonNull} = require("graphql");
+const {GraphQLSchema, GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLNonNull} = require("graphql");
 
 //create authors data
 const authors = [
@@ -45,6 +45,24 @@ const AuthorType = new GraphQLObjectType({
     fields: () => ({//fields is the object that contains the data
         id: {type: GraphQLNonNull(GraphQLInt)},//id is the field
         name: {type: GraphQLNonNull(GraphQLString)},//name is the field
+    })
+});
+
+//create rootQuery GraphQLObjectType
+const RootQueryType = new GraphQLObjectType({
+    name: 'Query',//name of the type
+    description: 'Root Query',//description of the type
+    fields: () => ({//fields is the object that contains the data
+        books: {//books is the field
+            type: new GraphQLList(BookType),//type of the field
+            description: 'List of All Books',//description of the field
+            resolve: () => books//resolve is the function that returns the data
+        },
+        authors: {//authors is the field
+            type: new GraphQLList(AuthorType),//type of the field
+            description: 'List of All Authors',//description of the field
+            resolve: () => authors//resolve is the function that returns the data
+        }
     })
 });
 
