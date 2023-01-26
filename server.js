@@ -5,8 +5,8 @@ const express = require("express");
 const port = 5000;
 //import {graphqlHTTP} from "express-graphql";
 const {graphqlHTTP} = require("express-graphql");
-//import GraphQLSchema and GraphQLObjectType  from "graphql";
-const {GraphQLSchema, GraphQLObjectType} = require("graphql");
+//import GraphQLSchema,GraphQLObjectType and GraphQLString  from "graphql";
+const {GraphQLSchema, GraphQLObjectType,GraphQLString} = require("graphql");
 
 //create schema
 const schema = new GraphQLSchema({
