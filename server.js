@@ -5,8 +5,8 @@ const express = require("express");
 const port = 5000;
 //import {graphqlHTTP} from "express-graphql";
 const {graphqlHTTP} = require("express-graphql");
-//import GraphQLSchema,GraphQLObjectType,GraphQLInt,GraphQLNonNull and GraphQLString  from "graphql";
-const {GraphQLSchema, GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLNonNull} = require("graphql");
+//import GraphQLSchema,GraphQLObjectType,GraphQLList,GraphQLInt,GraphQLNonNull and GraphQLString  from "graphql";
+const {GraphQLSchema, GraphQLObjectType,GraphQLList, GraphQLString, GraphQLInt, GraphQLNonNull} = require("graphql");
 
 //create authors data
 const authors = [
