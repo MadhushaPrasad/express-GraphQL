@@ -5,14 +5,14 @@ const express = require("express");
 const port = 5000;
 //import {graphqlHTTP} from "express-graphql";
 const {graphqlHTTP} = require("express-graphql");
-//import GraphQLSchema,GraphQLObjectType and GraphQLString  from "graphql";
-const {GraphQLSchema, GraphQLObjectType, GraphQLString} = require("graphql");
+//import GraphQLSchema,GraphQLObjectType,GraphQLInt,GraphQLNonNull and GraphQLString  from "graphql";
+const {GraphQLSchema, GraphQLObjectType, GraphQLString,GraphQLInt,GraphQLNonNull} = require("graphql");
 
 //create authors data
 const authors = [
-    { id: 1, name: 'J. K. Rowling' },
-    { id: 2, name: 'J. R. R. Tolkien' },
-    { id: 3, name: 'Brent Weeks' }
+    {id: 1, name: 'J. K. Rowling'},
+    {id: 2, name: 'J. R. R. Tolkien'},
+    {id: 3, name: 'Brent Weeks'}
 ]
 
 //create books data
@@ -27,18 +27,29 @@ const books = [
     {id: 8, name: 'Beyond the Shadows', authorId: 3}
 ];
 
-//create schema
-const schema = new GraphQLSchema({
-    query: new GraphQLObjectType({//query is the root query
-        name: 'HelloWorld',//name of the query
-        fields: () => ({//fields is the object that contains the data
-            message: {//message is the field
-                type: GraphQLString,//type of the field
-                resolve: () => 'Hello World'//resolve is the function that returns the data
-            }
-        })
+//create book GraphQLObjectType
+const BookType = new GraphQLObjectType({
+    name: 'Book',//name of the type
+    description: 'This represents a book written by an author',//description of the type
+    fields: () => ({//fields is the object that contains the data
+        id: {type: GraphQLNonNull(GraphQLInt)},//id is the field
+        name: {type: GraphQLNonNull(GraphQLString)},//name is the field
+        authorId: {type: GraphQLNonNull(GraphQLString)},//authorId is the field
     })
-})
+});
+
+// //create schema
+// const schema = new GraphQLSchema({
+//     query: new GraphQLObjectType({//query is the root query
+//         name: 'HelloWorld',//name of the query
+//         fields: () => ({//fields is the object that contains the data
+//             message: {//message is the field
+//                 type: GraphQLString,//type of the field
+//                 resolve: () => 'Hello World'//resolve is the function that returns the data
+//             }
+//         })
+//     })
+// })
 
 
 //create express app
