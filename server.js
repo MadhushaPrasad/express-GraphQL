@@ -6,7 +6,7 @@ const port = 5000;
 //import {graphqlHTTP} from "express-graphql";
 const {graphqlHTTP} = require("express-graphql");
 //import GraphQLSchema,GraphQLObjectType,GraphQLList,GraphQLInt,GraphQLNonNull and GraphQLString  from "graphql";
-const {GraphQLSchema, GraphQLObjectType,GraphQLList, GraphQLString, GraphQLInt, GraphQLNonNull} = require("graphql");
+const {GraphQLSchema, GraphQLObjectType, GraphQLList, GraphQLString, GraphQLInt, GraphQLNonNull} = require("graphql");
 
 //create authors data
 const authors = [
@@ -65,6 +65,11 @@ const RootQueryType = new GraphQLObjectType({
         }
     })
 });
+
+//create schema
+const schema = new GraphQLSchema({
+    query: RootQueryType//query is the root query
+})
 
 // //create schema
 // const schema = new GraphQLSchema({
