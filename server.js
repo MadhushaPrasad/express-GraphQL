@@ -26,13 +26,14 @@ const schema = new GraphQLSchema({
 const app = express();
 
 //create graphql endpoint
-app.use('/graphql', graphqlHTTP(
+app.use('/graphql', graphqlHTTP(//graphqlHTTP is the middleware that handles the graphql request
     {
-        graphiql: true,
+        schema: schema,//schema is the schema that we created
+        graphiql: true,//graphiql is the tool that we use to test our graphql endpoint
     }
 ))
 
 //listen to port
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on port ${port}`);//log the port that the server is running on
 });
